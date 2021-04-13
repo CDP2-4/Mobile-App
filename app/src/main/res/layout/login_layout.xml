@@ -37,13 +37,13 @@
         android:layout_marginTop="20dp"
 
         android:background="@drawable/rect_round_50_gray_empty"
-        android:drawableLeft="@drawable/login_person"
-        android:paddingLeft="10dp"
+        android:drawableLeft="@drawable/login_person_mini"
+        android:paddingLeft="15dp"
         android:singleLine="true"
-        android:text="아이디를 입력해주세요"
+        android:text="                아이디를 입력해주세요"
         android:textColor="#000000"
         android:textSize="15dp"
-        android:gravity="center|right"
+        android:gravity="center|left"
         />
 
     <EditText
@@ -53,13 +53,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/rect_round_50_gray_empty"
-        android:drawableLeft="@drawable/login_lock"
-        android:paddingLeft="10dp"
+        android:drawableLeft="@drawable/login_lock_mini"
+        android:paddingLeft="15dp"
         android:singleLine="true"
-        android:text="비밀번호를 입력해주세요"
+        android:text="               비밀번호를 입력해주세요"
         android:textColor="#000000"
         android:textSize="15dp"
-        android:gravity="center|right"
+        android:gravity="center|left"
         />
 
     <TextView
@@ -78,7 +78,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:text="Copyright 2021. CDP2-4 all rights reserved.
 "
         android:textColor="#000000"
