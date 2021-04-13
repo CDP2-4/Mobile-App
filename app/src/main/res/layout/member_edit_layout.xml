@@ -53,7 +53,8 @@
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="sam0909"
             android:textSize="15dp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -89,7 +90,8 @@
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="홍길동"
             android:textSize="15dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -125,7 +127,8 @@
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="010-3456-2222"
             android:textSize="15dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -161,7 +164,8 @@
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
             android:textSize="15dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -197,7 +201,8 @@
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
             android:textSize="15dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:singleLine="true" />
 
     </LinearLayout>
 

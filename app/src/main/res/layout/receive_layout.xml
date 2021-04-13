@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/receive_tv_curr_warehouse"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/nexon_lv2_gothic_medium"
+            android:text="현재 창고:"
+            android:textSize="17dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/receive_tv_warehouse_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/nexon_lv2_gothic_medium"
+            android:text="창고명"
+            android:textSize="17dp"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/receive_tv_qr_photo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="80dp"
+        android:gravity="center"
+        android:paddingHorizontal="40dp"
+        android:background="@drawable/rect_round_50_light_gray"
+        android:fontFamily="@font/nexon_lv2_gothic"
+        android:drawableLeft="@drawable/receive_qr"
+        android:text="QR코드 촬영"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/receive_tv_label_photo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="80dp"
+        android:gravity="center"
+        android:paddingHorizontal="40dp"
+        android:background="@drawable/rect_round_50_light_gray"
+        android:fontFamily="@font/nexon_lv2_gothic"
+        android:drawableLeft="@drawable/receive_label"
+        android:text="라벨지 촬영"
+        android:textColor="@color/black" />
+</LinearLayout>
