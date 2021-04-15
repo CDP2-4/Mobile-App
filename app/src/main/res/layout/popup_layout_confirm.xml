@@ -19,6 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="안내"
+            android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/colorMain"
@@ -46,6 +47,7 @@
             android:layout_height="53sp"
             android:layout_marginTop="10dp"
             android:text="로그아웃이 완료되었습니다"
+            android:fontFamily="@font/nexon_lv2_gothic"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="20dp"
@@ -68,6 +70,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="확인"
+            android:fontFamily="@font/nexon_lv2_gothic"
             android:gravity="center"
             android:textColor="#ffffffff"
             android:textSize="17dp"/>
