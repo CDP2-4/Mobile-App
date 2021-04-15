@@ -12,8 +12,6 @@ import com.cdp2.schemi.R;
 public class Receive_Activity extends AppCompatActivity {
     String TAG = "Receive_Activity";
 
-    TextView mTv_curr_warehouse;
-    TextView mTv_warehouse_name;
     TextView mTv_qr_photo;
     TextView mTv_label_photo;
 
@@ -23,8 +21,6 @@ public class Receive_Activity extends AppCompatActivity {
         setContentView(R.layout.receive_layout);
         setTitle("입고");
 
-        mTv_curr_warehouse=findViewById(R.id.receive_tv_curr_warehouse);
-        mTv_warehouse_name=findViewById(R.id.receive_tv_warehouse_name);
         mTv_qr_photo=findViewById(R.id.receive_tv_qr_photo);
         mTv_label_photo=findViewById(R.id.receive_tv_label_photo);
     }

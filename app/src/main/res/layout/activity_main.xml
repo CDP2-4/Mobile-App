@@ -87,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_ll_inout"
                 android:layout_width="180dp"
                 android:layout_height="200dp"
                 android:background="@drawable/rect_round_50_gray"
@@ -95,7 +96,6 @@
                 android:layout_margin="10dp">
 
                 <TextView
-                    android:id="@+id/main_tv_warehouse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/main_warehouse_mini"
@@ -120,6 +120,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/main_ll_receive"
                 android:layout_width="180dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
@@ -146,6 +147,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_ll_release"
                 android:layout_width="180dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"

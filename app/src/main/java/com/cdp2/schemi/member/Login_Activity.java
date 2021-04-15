@@ -27,7 +27,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         bar.hide();
 
         mEt_id=findViewById(R.id.login_et_id);
-        mTv_login = findViewById(R.id.login_tv_login);
+        mEt_pwd=findViewById(R.id.login_et_pw);
+        mTv_login=findViewById(R.id.login_tv_login);
 
 
         mTv_login.setOnClickListener( this );
