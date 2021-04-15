@@ -37,8 +37,8 @@
         android:gravity="center|left"
         android:paddingLeft="15dp"
         android:singleLine="true"
-        android:text="      아이디를 입력해주세요"
-        android:textColor="@color/gray"
+        android:hint="      아이디를 입력해주세요."
+        android:textColorHint="@color/gray"
         android:textSize="13dp" />
 
     <EditText
@@ -53,8 +53,9 @@
         android:gravity="center|left"
         android:paddingLeft="15dp"
         android:singleLine="true"
-        android:text="      비밀번호를 입력해주세요"
-        android:textColor="@color/gray"
+        android:hint="      비밀번호를 입력해주세요."
+        android:textColorHint="@color/gray"
+        android:inputType="textPassword"
         android:textSize="13dp" />
 
     <TextView
