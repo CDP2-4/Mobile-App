@@ -21,6 +21,7 @@ public class Receive_Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receive_layout);
+        setTitle("입고");
 
         mTv_curr_warehouse=findViewById(R.id.receive_tv_curr_warehouse);
         mTv_warehouse_name=findViewById(R.id.receive_tv_warehouse_name);

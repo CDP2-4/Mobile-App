@@ -39,20 +39,20 @@
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="아이디"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
         <EditText
             android:id="@+id/edit_et_id"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/rect_round_50_gray"
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="sam0909"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:textColor="@color/gray"
             android:singleLine="true" />
 
@@ -76,20 +76,20 @@
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="이름"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
         <EditText
             android:id="@+id/edit_et_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/rect_round_50_light_gray"
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="홍길동"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:textColor="@color/black"
             android:singleLine="true" />
 
@@ -113,20 +113,20 @@
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="전화번호"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
         <EditText
             android:id="@+id/edit_et_tel"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/rect_round_50_light_gray"
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
             android:text="010-3456-2222"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:textColor="@color/black"
             android:singleLine="true" />
 
@@ -151,20 +151,21 @@
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="비밀번호"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
         <EditText
             android:id="@+id/edit_et_pwd"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/rect_round_50_light_gray"
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="left|center"
             android:fontFamily="@font/nexon_lv2_gothic"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:textColor="@color/black"
+            android:inputType="textPassword"
             android:singleLine="true" />
 
     </LinearLayout>
@@ -188,13 +189,13 @@
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="비밀번호 확인"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
         <EditText
             android:id="@+id/edit_et_pwd_re"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/rect_round_50_light_gray"
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
@@ -202,6 +203,7 @@
             android:fontFamily="@font/nexon_lv2_gothic"
             android:textSize="15dp"
             android:textColor="@color/black"
+            android:inputType="textPassword"
             android:singleLine="true" />
 
     </LinearLayout>
