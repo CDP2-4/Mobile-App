@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andrdoid="http://schemas.android.com/apk/distribution"
     package="com.cdp2.schemi">
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".common.Popup_Activity"
+            andrdoid:theme="@style/popupTheme" android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
             android:theme="@style/SchemiTheme"
 
             android:configChanges="orientation|screenSize|keyboardHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".common.QR_Photo_Activity" />
+
     </application>
 
 </manifest>
