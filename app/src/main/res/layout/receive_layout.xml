@@ -22,7 +22,7 @@
             android:gravity="center"
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="현재 창고:"
-            android:textSize="17dp"
+            android:textSize="15dp"
             android:textColor="@color/black"/>
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/nexon_lv2_gothic_medium"
             android:text="창고명"
-            android:textSize="17dp"
+            android:textSize="15dp"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -50,6 +50,7 @@
         android:fontFamily="@font/nexon_lv2_gothic"
         android:drawableLeft="@drawable/receive_qr_mini"
         android:text="QR코드 촬영"
+        android:textSize="14dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -64,5 +65,6 @@
         android:fontFamily="@font/nexon_lv2_gothic"
         android:drawableLeft="@drawable/receive_label_mini"
         android:text="라벨지 촬영"
+        android:textSize="14dp"
         android:textColor="@color/black" />
 </LinearLayout>

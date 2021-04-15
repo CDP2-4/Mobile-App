@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cdp2.schemi.R;
@@ -22,7 +23,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
+        ActionBar bar=getSupportActionBar();
+        bar.hide();
 
         mEt_id=findViewById(R.id.login_et_id);
         mTv_login = findViewById(R.id.login_tv_login);

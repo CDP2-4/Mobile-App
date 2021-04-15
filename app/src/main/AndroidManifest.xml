@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+<<<<<<< HEAD
         <activity android:name=".common.Popup_Activity"
             andrdoid:theme="@style/popupTheme" android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
+=======
+        <activity android:name=".product.Receive_Activity"
+>>>>>>> d62fd1c8bd53c0c782d345b8b8047736f99ecbdb
             android:theme="@style/SchemiTheme"
 
             android:configChanges="orientation|screenSize|keyboardHidden">
