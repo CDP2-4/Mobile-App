@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -9,7 +10,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:scaleType="centerInside"
         android:src="@drawable/schemi_logo_no_space" />
 
@@ -17,29 +17,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/nexon_lv2_gothic"
         android:text="Safety Chemical Warehouse Keeper"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_marginBottom="30dp"/>
 
 
-    <EditText
-        android:id="@+id/login_et_id"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rect_round_50_gray_empty"
-        android:drawableLeft="@drawable/login_person_mini"
-        android:fontFamily="@font/nexon_lv2_gothic"
-        android:gravity="center|left"
-        android:paddingLeft="15dp"
-        android:singleLine="true"
-        android:hint="      아이디를 입력해주세요."
-        android:textColorHint="@color/gray"
-        android:textSize="13dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rect_round_50_gray_empty"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/login_person_mini"
+                android:layout_marginRight="15dp"/>
+
+            <EditText
+                android:id="@+id/login_et_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:text=""
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:hint="아이디를 입력해주세요."
+                android:textColorHint="@color/gray"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 
     <EditText
         android:id="@+id/login_et_pw"
@@ -52,6 +76,7 @@
         android:fontFamily="@font/nexon_lv2_gothic"
         android:gravity="center|left"
         android:paddingLeft="15dp"
+        android:textColor="@color/black"
         android:singleLine="true"
         android:hint="      비밀번호를 입력해주세요."
         android:textColorHint="@color/gray"
@@ -60,7 +85,7 @@
 
     <TextView
         android:id="@+id/login_tv_login"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
