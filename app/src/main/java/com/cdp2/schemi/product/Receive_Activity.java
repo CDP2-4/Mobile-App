@@ -1,14 +1,21 @@
 package com.cdp2.schemi.product;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +31,8 @@ import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Edit_Activity;
 
+import java.io.File;
+
 public class Receive_Activity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "Receive_Activity";
     int request_Code_Qr = 1;
@@ -34,6 +43,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     TextView mTv_qr_photo;
     TextView mTv_label_photo;
     TextView mTv_submit;
+    ImageView mIv_label_photo_image;
+
+    File file;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,10 +56,21 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{android.Manifest.permission.CAMERA}, 50);
         }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 50);
+        }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 50);
+        }
+
+
+        File sdcard = Environment.getExternalStorageDirectory();
+        file = new File(sdcard, "capture.jpg");
 
         mTv_qr_photo=findViewById(R.id.receive_tv_qr_photo);
         mTv_label_photo=findViewById(R.id.receive_tv_label_photo);
         mTv_submit=findViewById(R.id.receive_tv_submit);
+        mIv_label_photo_image=findViewById(R.id.receive_iv_label_photo_image);
 
         mTv_qr_photo.setOnClickListener(this);
         mTv_label_photo.setOnClickListener(this);
@@ -62,8 +85,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         }
 
         if(v == mTv_label_photo) {
-            Intent t = new Intent(Receive_Activity.this, QR_Photo_Activity.class);
-            startActivityForResult(t, request_Code_Label);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+            startActivityForResult(intent, request_Code_Label);
         }
 
         if(v == mTv_submit) {
@@ -90,8 +114,10 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         } else if (requestCode == request_Code_Label) {
             /** 라벨 촬영이 완료된 경우 */
             if (resultCode == RESULT_OK) {
-                mTv_label_photo.setText(data.getData().toString());
-                _isShootLabel = true;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 8;
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+                mIv_label_photo_image.setImageBitmap(bitmap);
             } else {
                 Toast.makeText(Receive_Activity.this, "failed", Toast.LENGTH_SHORT).show();
             }

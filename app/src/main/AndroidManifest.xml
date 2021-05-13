@@ -3,7 +3,8 @@
     xmlns:andrdoid="http://schemas.android.com/apk/distribution"
     package="com.cdp2.schemi">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -40,6 +41,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.QR_Photo_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".product.Label_Photo_Activity"
             android:screenOrientation="portrait" />
 
     </application>
