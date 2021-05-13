@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLl_receive=findViewById(R.id.main_ll_receive);
         mLl_release=findViewById(R.id.main_ll_release);
 
+        mTv_member_modify.setOnClickListener( this );
         mTv_logout.setOnClickListener( this );
     }
 
     @Override
     public void onClick(View v) {
-        if(v == mTv_logout){
-
+        if(v == mTv_logout) {
             showLogout_Custom();
         }
     }
