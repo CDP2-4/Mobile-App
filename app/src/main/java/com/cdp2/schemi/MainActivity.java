@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaMetadata;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,7 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdp2.schemi.common.I_VALUE;
+import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.member.Login_Activity;
+import com.cdp2.schemi.member.Member_Edit_Activity;
+
+import java.lang.reflect.Member;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == mTv_logout) {
             showLogout_Custom();
         }
+
+        if(v == mTv_member_modify) {
+            Intent t = new Intent(MainActivity.this, Member_Edit_Activity.class);
+            startActivity(t);
+            finish();
+        }
     }
 
     private void showLogOut(){
@@ -56,16 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         _alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences sharedPref = getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("_isLogin", "__empty__");
-                editor.commit();
 
-                finish();
-
-                Intent t = new Intent(MainActivity.this, Login_Activity.class);
-                startActivity(t);
-                finish();
             }
         });
         _alert.show();
@@ -79,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         _dialog.setCancelable(false);
 
-        TextView _tvCAncel = _dialog.findViewById(R.id.popup_tv_cancle);
+        TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);
 
-        _tvCAncel.setOnClickListener(new View.OnClickListener() {
+        _tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _dialog.dismiss();
@@ -92,7 +94,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         _tvOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPref = getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("_isLogin", "__empty__");
+                editor.commit();
+
                 _dialog.dismiss();
+                finish();
+
+                Intent t = new Intent(MainActivity.this, Login_Activity.class);
+                startActivity(t);
+                finish();
             }
         });
 

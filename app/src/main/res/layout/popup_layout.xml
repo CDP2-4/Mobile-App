@@ -60,7 +60,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/popup_tv_cancle"
+            android:id="@+id/popup_tv_cancel"
             android:layout_width="125dp"
             android:layout_height="60dp"
             android:background="@drawable/rect_round_50_white_blueline"

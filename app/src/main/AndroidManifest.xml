@@ -37,6 +37,9 @@
         <activity
             android:name=".member.Login_Activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".member.Member_Edit_Activity"
+            android:screenOrientation="portrait" />
 
     </application>
 
