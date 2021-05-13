@@ -47,7 +47,7 @@
         android:background="@drawable/rect_round_50_light_gray"
         android:drawableLeft="@drawable/receive_qr_mini"
         android:text="QR코드 촬영"
-        android:textSize="14dp"
+        android:textSize="15dp"
         android:textColor="@color/black" />
 
     <TextView
@@ -61,6 +61,20 @@
         android:background="@drawable/rect_round_50_light_gray"
         android:drawableLeft="@drawable/receive_label_mini"
         android:text="라벨지 촬영"
-        android:textSize="14dp"
+        android:textSize="15dp"
         android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/receive_tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginVertical="30dp"
+        android:layout_marginHorizontal="80dp"
+        android:gravity="center"
+        android:paddingHorizontal="40dp"
+        android:background="@drawable/rect_round_50_blue"
+        android:text="입고 처리"
+        android:textSize="15dp"
+        android:textColor="@color/white" />
+
 </LinearLayout>
