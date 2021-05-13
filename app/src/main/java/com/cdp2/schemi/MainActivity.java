@@ -18,8 +18,10 @@ import android.widget.TextView;
 
 import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
+import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Edit_Activity;
+import com.cdp2.schemi.product.Receive_Activity;
 
 import java.lang.reflect.Member;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTv_member_modify.setOnClickListener( this );
         mTv_logout.setOnClickListener( this );
+        mLl_receive.setOnClickListener( this );
     }
 
     @Override
@@ -54,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(v == mTv_member_modify) {
             Intent t = new Intent(MainActivity.this, Member_Edit_Activity.class);
+            startActivity(t);
+            finish();
+        }
+
+        if(v == mLl_receive) {
+            Intent t = new Intent(MainActivity.this, Receive_Activity.class);
             startActivity(t);
             finish();
         }

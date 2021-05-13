@@ -4,6 +4,7 @@
     package="com.cdp2.schemi">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
 
@@ -13,12 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-
-
-        <activity
-            android:name=".common.Popup_Activity"
-            android:screenOrientation="portrait"
-            andrdoid:theme="@style/popupTheme" />
 
         <activity
             android:name=".Intro_Activity"
@@ -39,6 +34,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".member.Member_Edit_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".product.Receive_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.QR_Photo_Activity"
             android:screenOrientation="portrait" />
 
     </application>
