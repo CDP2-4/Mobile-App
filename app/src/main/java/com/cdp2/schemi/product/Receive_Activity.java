@@ -1,6 +1,7 @@
 package com.cdp2.schemi.product;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
@@ -25,6 +28,11 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receive_layout);
         setTitle("입고");
+        
+        /** 권한 허용 */
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{android.Manifest.permission.CAMERA}, 50);
+        }
 
         mTv_qr_photo=findViewById(R.id.receive_tv_qr_photo);
         mTv_label_photo=findViewById(R.id.receive_tv_label_photo);
