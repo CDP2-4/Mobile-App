@@ -2,22 +2,19 @@ package com.cdp2.schemi.common;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.cdp2.schemi.R;
 import com.google.zxing.Result;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class QR_Photo_Activity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
@@ -35,7 +32,11 @@ public class QR_Photo_Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(QR_Photo_Activity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        /** 원래 receive 페이지로 값 넘겨주기 */
+                        Intent qr_Str = new Intent();
+                        qr_Str.setData(Uri.parse(result.getText()));
+                        setResult(RESULT_OK, qr_Str);
+                        finish();
                     }
                 });
             }
@@ -60,3 +61,5 @@ public class QR_Photo_Activity extends AppCompatActivity {
         super.onPause();
     }
 }
+
+// https://github.com/yuriy-budiyev/code-scanner

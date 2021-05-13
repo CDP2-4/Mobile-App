@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.cdp2.schemi.member.Member_Edit_Activity;
 
 public class Receive_Activity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "Receive_Activity";
+    int request_Code = 1;
 
     TextView mTv_qr_photo;
     TextView mTv_label_photo;
@@ -44,7 +46,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if(v == mTv_qr_photo) {
             Intent t = new Intent(Receive_Activity.this, QR_Photo_Activity.class);
-            startActivity(t);
+            startActivityForResult(t, request_Code);
         }
 
 //        if(v == mTv_label_photo) {
@@ -52,5 +54,16 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 //            startActivity(t);
 //            finish();
 //        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == request_Code) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(Receive_Activity.this, data.getData().toString(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(Receive_Activity.this, "failed", Toast.LENGTH_SHORT).show();
+        }
     }
 }

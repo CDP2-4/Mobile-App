@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
@@ -26,6 +27,7 @@ import com.cdp2.schemi.product.Receive_Activity;
 import java.lang.reflect.Member;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    int request_Code = 1;
 
     TextView mTv_member_modify;
     TextView mTv_logout;
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTv_member_modify.setOnClickListener( this );
         mTv_logout.setOnClickListener( this );
+        mLl_inout.setOnClickListener( this );
         mLl_receive.setOnClickListener( this );
+        mLl_release.setOnClickListener( this );
     }
 
     @Override
@@ -58,13 +62,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == mTv_member_modify) {
             Intent t = new Intent(MainActivity.this, Member_Edit_Activity.class);
             startActivity(t);
-            finish();
+        }
+
+        if(v == mLl_inout) {
+            Intent t = new Intent(MainActivity.this, QR_Photo_Activity.class);
+            startActivityForResult(t, request_Code);
         }
 
         if(v == mLl_receive) {
             Intent t = new Intent(MainActivity.this, Receive_Activity.class);
-            startActivity(t);
-            finish();
+            startActivityForResult(t, request_Code);
+        }
+
+        if(v == mLl_release) {
+            Intent t = new Intent(MainActivity.this, QR_Photo_Activity.class);
+            startActivityForResult(t, request_Code);
         }
     }
 
@@ -120,5 +132,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         _dialog.show();
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == request_Code) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(MainActivity.this, data.getData().toString(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_SHORT).show();
+        }
     }
 }
