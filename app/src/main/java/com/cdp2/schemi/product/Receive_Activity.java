@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
@@ -85,9 +86,10 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         }
 
         if(v == mTv_label_photo) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-            startActivityForResult(intent, request_Code_Label);
+            Intent t = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Uri uri = FileProvider.getUriForFile(getBaseContext(), "com.cdp2.schemi.fileprovider", file);
+            t.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            startActivityForResult(t, request_Code_Label);
         }
 
         if(v == mTv_submit) {
