@@ -19,18 +19,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.bumptech.glide.Glide;
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.I_VALUE;
+import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Edit_Activity;
+import com.yanzhenjie.album.Action;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumConfig;
+import com.yanzhenjie.album.AlbumFile;
+import com.yanzhenjie.album.AlbumLoader;
 
 import java.io.File;
 
@@ -52,6 +60,10 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receive_layout);
+
+
+        Album.initialize(AlbumConfig.newBuilder(this)
+                .setAlbumLoader(new MediaLoader()).build());
         
         /** 권한 허용 */
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -86,10 +98,35 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         }
 
         if(v == mTv_label_photo) {
-            Intent t = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            Uri uri = FileProvider.getUriForFile(getBaseContext(), "com.cdp2.schemi.fileprovider", file);
-            t.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            startActivityForResult(t, request_Code_Label);
+//            Intent t = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            Uri uri = FileProvider.getUriForFile(getBaseContext(), "com.cdp2.schemi.fileprovider", file);
+//            t.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//            startActivityForResult(t, request_Code_Label);
+
+
+            Album.camera(this) // Camera function.
+                    .image() // Take Picture.
+                    .onResult(new Action<String>() {
+                        @Override
+                        public void onAction(@NonNull String result) {
+                            OjyLog.i(TAG, "onResult() / result : "+result);
+
+
+                            Glide.with(Receive_Activity.this)
+                                    .load(result)
+                                    .thumbnail(0.1f)
+                                    .into(mIv_label_photo_image);
+
+
+                        }
+                    })
+                    .onCancel(new Action<String>() {
+                        @Override
+                        public void onAction(@NonNull String result) {
+                            OjyLog.i(TAG, "onCancel() / result : "+result);
+                        }
+                    })
+                    .start();
         }
 
         if(v == mTv_submit) {
@@ -114,6 +151,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(Receive_Activity.this, "failed", Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == request_Code_Label) {
+            OjyLog.i(TAG, "resultCode :"+resultCode);
+            OjyLog.i(TAG, "data.getDataStrin :"+data.getDataString() );
+
             /** 라벨 촬영이 완료된 경우 */
             if (resultCode == RESULT_OK) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -156,5 +196,27 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
         _dialog.show();
 
+    }
+
+
+
+
+
+    public class MediaLoader implements AlbumLoader {
+
+        @Override
+        public void load(ImageView imageView, AlbumFile albumFile) {
+            load(imageView, albumFile.getPath());
+        }
+
+        @Override
+        public void load(ImageView imageView, String url) {
+            Glide.with(Receive_Activity.this)
+                    .load(url)
+                    .error(R.drawable.app_logo)
+                    .placeholder(R.drawable.app_logo)
+                    .thumbnail(0.1f)
+                    .into(imageView);
+        }
     }
 }

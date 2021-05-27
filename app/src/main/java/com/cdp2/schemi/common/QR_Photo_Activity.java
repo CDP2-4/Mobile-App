@@ -17,6 +17,7 @@ import com.cdp2.schemi.R;
 import com.google.zxing.Result;
 
 public class QR_Photo_Activity extends AppCompatActivity {
+    String TAG  = "QR_Photo_Activity";
     private CodeScanner mCodeScanner;
 
     @Override
@@ -35,6 +36,7 @@ public class QR_Photo_Activity extends AppCompatActivity {
                         /** 원래 receive 페이지로 값 넘겨주기 */
                         Intent qr_Str = new Intent();
                         qr_Str.setData(Uri.parse(result.getText()));
+                        OjyLog.i(TAG, "result.getText() : "+result.getText());
                         setResult(RESULT_OK, qr_Str);
                         finish();
                     }
