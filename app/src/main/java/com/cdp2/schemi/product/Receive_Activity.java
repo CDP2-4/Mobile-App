@@ -3,21 +3,16 @@ package com.cdp2.schemi.product;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,25 +22,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
-import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
+import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
-import com.cdp2.schemi.member.Login_Activity;
-import com.cdp2.schemi.member.Member_Edit_Activity;
+import com.cdp2.schemi.member.Member_Value;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
 import com.yanzhenjie.album.AlbumFile;
 import com.yanzhenjie.album.AlbumLoader;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,12 +51,29 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     boolean _isShootQr = false;
     boolean _isShootLabel = false;
 
+    TextView mTv_warehouse_name;
     TextView mTv_qr_photo;
     TextView mTv_label_photo;
     TextView mTv_submit;
     ImageView mIv_label_photo_image;
 
     File file;
+
+
+    /** 서버와 통신한 후 이 핸들러로 옴 */
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            int _sel = msg.what;
+
+            switch(_sel){
+                case HttpClass.ACTION_01:
+                    requestWarehouse((String)msg.obj);
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -88,6 +100,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         File sdcard = Environment.getExternalStorageDirectory();
         file = new File(sdcard, "capture.jpg");
 
+        mTv_warehouse_name = findViewById(R.id.receive_tv_warehouse_name);
         mTv_qr_photo=findViewById(R.id.receive_tv_qr_photo);
         mTv_label_photo=findViewById(R.id.receive_tv_label_photo);
         mTv_submit=findViewById(R.id.receive_tv_submit);
@@ -96,6 +109,8 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         mTv_qr_photo.setOnClickListener(this);
         mTv_label_photo.setOnClickListener(this);
         mTv_submit.setOnClickListener(this);
+
+        loadWarehouse();
     }
 
     @Override
@@ -234,4 +249,43 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                     .into(imageView);
         }
     }
+
+
+    private void loadWarehouse() {
+        Member_Value _user = MyCommon.get_UserInfo(this);
+        String mUser_id = _user.mUser_id;
+
+        KjyLog.i(TAG, "userId: " + mUser_id);
+
+        HashMap<String, String> _params = new HashMap();
+        _params.put("action", "_isLoadWarehouse");
+        _params.put("user_id", mUser_id);
+        new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
+    }
+
+    private void requestWarehouse(String _str) {
+        KjyLog.i(TAG, "requestWarehouse() / _str : "+_str);
+        String mWarehouse_name = "";
+
+        try {
+            JSONObject _obj = new JSONObject(_str);
+
+            int _res = _obj.getInt("res");
+            KjyLog.i(TAG, "res: " + _res);
+
+            if(_res == 0){
+                /** 성공적으로 불러왔으므로 창고 정보 출력*/
+                mWarehouse_name = _obj.getString("warehouse_name");
+                mTv_warehouse_name.setText(mWarehouse_name);
+            }else{
+                /** 불러오기 실패 */
+                Toast.makeText(this, "창고 정보를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            KjyLog.e(TAG, e);
+        }
+
+    }
 }
+
+

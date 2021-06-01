@@ -18,7 +18,7 @@ public class Member_Value implements Serializable {
     public String mUser_Name = "";
     public String mUser_tel = "";
 
-    Member_Value(){}
+    public Member_Value(){}
 
 
     public Member_Value(JSONObject _obj){
@@ -56,6 +56,7 @@ public class Member_Value implements Serializable {
                 "_id=" + _id +
                 ", mUser_id=" + mUser_id+
                 ", mUser_pwd=" + mUser_pwd  +
-                ", mUser_Name=" + mUser_Name;
+                ", mUser_Name=" + mUser_Name +
+                        ", mUser_Tel=" + mUser_tel;
     }
 }

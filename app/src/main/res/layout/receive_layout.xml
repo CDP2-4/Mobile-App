@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginLeft="10dp"
-            android:text="창고명"
+            android:text=""
             android:textSize="15dp"
             android:textColor="@color/black" />
     </LinearLayout>

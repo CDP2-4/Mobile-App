@@ -32,6 +32,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     EditText mEt_pwd;
     TextView mTv_login;
 
+    /** 서버와 통신한 후 이 핸들러로 옴 */
     @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler(){
         @Override
@@ -48,8 +49,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
 
     private void checkLogin(String _str){
-        OjyLog.i(TAG, "checkLogin() / _str : "+_str);
-
+        KjyLog.i(TAG, "checkLogin() / _str : "+_str);
 
         try {
             JSONObject _obj = new JSONObject(_str);
@@ -64,7 +64,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 Member_Value _user = new Member_Value(_obj.getJSONObject("info"));
                 MyCommon.save_UserInfo(this, _user);
 
-                KjyLog.i(TAG, "MyCommon.save_UserInfo");
                 Intent t = new Intent(this, MainActivity.class);
                 startActivity(t);
                 finish();
@@ -74,7 +73,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "아이디 혹은 비밀번호를 잘못입력하셨습니다.", Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
-            OjyLog.e(TAG, e);
+            KjyLog.e(TAG, e);
         }
 
 
@@ -113,15 +112,12 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             }else{
                 /** 서버에 아이디 비번 체크. */
                 checkLogin();
-
             }
-
         }
     }
 
 
-
-
+    /** 서버 통신 */
     private void checkLogin(){
         KjyLog.i(TAG, "checkLogin()");
         String _idStr = mEt_id.getText().toString();
