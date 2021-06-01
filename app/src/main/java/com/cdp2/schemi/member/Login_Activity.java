@@ -55,14 +55,16 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             JSONObject _obj = new JSONObject(_str);
 
             int _res = _obj.getInt("res");
+            KjyLog.i(TAG, "res: " + _res);
 
             if(_res == 0){
                 /** 아이디 비번 맞으니깐 메인으로.*/
                 MyCommon.save_SharedPreferences(this, "_isLogin", "_isLogin");
 
-                Member_Value _user = new Member_Value( _obj);
+                Member_Value _user = new Member_Value(_obj.getJSONObject("info"));
                 MyCommon.save_UserInfo(this, _user);
 
+                KjyLog.i(TAG, "MyCommon.save_UserInfo");
                 Intent t = new Intent(this, MainActivity.class);
                 startActivity(t);
                 finish();

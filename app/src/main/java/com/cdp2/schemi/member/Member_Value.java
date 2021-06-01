@@ -22,13 +22,13 @@ public class Member_Value implements Serializable {
 
 
     public Member_Value(JSONObject _obj){
+        KjyLog.i(TAG, _obj.toString());
         try{
             _id= _obj.getInt("no");
             mUser_id= _obj.getString("user_id");
             mUser_pwd= _obj.getString("user_pwd");
             mUser_Name= _obj.getString("user_name");
             mUser_tel= _obj.getString("user_tel");
-
         }catch(Exception e){
             KjyLog.e(TAG, e);
         }

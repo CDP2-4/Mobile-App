@@ -7,7 +7,6 @@ import com.cdp2.schemi.member.Member_Value;
 
 public class MyCommon {
 
-
     /** 1. 로그인할때 쓸거 : key:_isLogin, value:_isLogin*/
     public static void save_SharedPreferences(Context _ac, String _key, String _value){
         SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
@@ -33,11 +32,13 @@ public class MyCommon {
 
         String _userStr = _user.toString();
         String _userARr01[] = _userStr.split(", ");
+        KjyLog.i("save_UserInfo", _userStr);
 
 
-        for(int i=0 ; i<_userARr01.length ; i++){
-           String _key = _userARr01[i].split("=")[0];
+        for(int i=0 ; i<_userARr01.length ; i++) {
+            String _key = _userARr01[i].split("=")[0];
             String _value = _userARr01[i].split("=")[1];
+            KjyLog.i("for", _key + ", " + _value);
 
             editor.putString(_key, _value);
             editor.commit();
