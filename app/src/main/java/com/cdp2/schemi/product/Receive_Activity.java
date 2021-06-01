@@ -1,6 +1,7 @@
 package com.cdp2.schemi.product;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,7 +32,10 @@ import androidx.core.content.FileProvider;
 import com.bumptech.glide.Glide;
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
+import com.cdp2.schemi.common.HttpClass;
+import com.cdp2.schemi.common.HttpClass_bak;
 import com.cdp2.schemi.common.I_VALUE;
+import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Login_Activity;
@@ -41,6 +47,8 @@ import com.yanzhenjie.album.AlbumFile;
 import com.yanzhenjie.album.AlbumLoader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Receive_Activity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "Receive_Activity";
@@ -55,6 +63,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     ImageView mIv_label_photo_image;
 
     File file;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,6 +125,13 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                                     .load(result)
                                     .thumbnail(0.1f)
                                     .into(mIv_label_photo_image);
+
+
+
+                            ArrayList<String> _fileList = new ArrayList<>();
+                            _fileList.add( result );
+                            new HttpClass(Receive_Activity.this, HttpClass.ACTION_01, null, _fileList, null).start();
+
 
 
                         }

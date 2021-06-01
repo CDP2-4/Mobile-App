@@ -19,9 +19,11 @@ import android.widget.Toast;
 
 import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
+import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Edit_Activity;
+import com.cdp2.schemi.member.Member_Value;
 import com.cdp2.schemi.product.Receive_Activity;
 
 import java.lang.reflect.Member;
@@ -35,10 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout mLl_receive;
     LinearLayout mLl_release;
 
+    Member_Value mUser_Info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mUser_Info = MyCommon.get_UserInfo(this);
 
         mTv_member_modify=findViewById(R.id.main_tv_member_modify);
         mTv_logout=findViewById(R.id.main_tv_logout);

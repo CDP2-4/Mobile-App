@@ -1,10 +1,13 @@
 package com.cdp2.schemi.member;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.JetPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,8 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
+import com.cdp2.schemi.common.HttpClass;
+import com.cdp2.schemi.common.HttpClass_bak;
 import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
+import com.cdp2.schemi.common.MyCommon;
+import com.cdp2.schemi.common.OjyLog;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Member;
+import java.util.HashMap;
 
 public class Login_Activity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "Login_Activity";
@@ -26,10 +38,67 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     EditText mEt_pwd;
     TextView mTv_login;
 
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            int _sel = msg.what;
+
+            switch(_sel){
+                case HttpClass_bak.ACTION_01:
+                    checkLogin((String)msg.obj);
+                    break;
+            }
+        }
+    };
+
+
+    private void checkLogin(String _str){
+        OjyLog.i(TAG, "checkLogin() / _str : "+_str);
+
+
+        try {
+            JSONObject _obj = new JSONObject(_str);
+
+            int _res = _obj.getInt("res");
+
+            if(_res == 0){
+                /** 아이디 비번 맞으니깐 메인으로.*/
+
+                MyCommon.save_SharedPreferences(this, "_isLogin", "_isLogin");
+
+                Member_Value _user = new Member_Value( _obj);
+                MyCommon.save_UserInfo(this, _user);
+
+
+                Intent t = new Intent(this, MainActivity.class);
+                startActivity(t);
+                finish();
+
+            }else{
+                /** 아이디 혹은 비밀번호가 잘못됨.*/
+                Toast.makeText(this, "아이디 혹은 비밀번호를 잘못입력하셨습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            OjyLog.e(TAG, e);
+        }
+
+
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        String _isLogin = MyCommon.get_save_SharedPreferences(this, "_isLogin");
+
+        if(_isLogin.equals("_isLogin")){
+            Intent t = new Intent(this, MainActivity.class);
+            startActivity(t);
+            finish();
+
+        }
 
 
         mEt_id=findViewById(R.id.login_et_id);
@@ -65,19 +134,20 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         String _pwdStr = mEt_pwd.getText().toString();
 
         if(_idStr.equals(_pwdStr)){
-            SharedPreferences sharedPref = getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("_isLogin", "_isLogin");
-            editor.commit();
-
-
             Intent t = new Intent(this, MainActivity.class);
             startActivity(t);
             finish();
+
+
         }else{
             Toast.makeText(this, "아이디가 없거나 아이디/비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-
         }
+
+//        HashMap<String, String> _params = new HashMap();
+//        _params.put("action", "_isLoginCheck");
+//        _params.put("u_id", _idStr);
+//        _params.put("u_pwd", _pwdStr);
+//        new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
 
     }
 
