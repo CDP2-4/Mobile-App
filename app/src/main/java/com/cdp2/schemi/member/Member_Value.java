@@ -13,19 +13,21 @@ public class Member_Value implements Serializable {
     String TAG = "Member_Value";
 
     int _id = 0;
-    String mUser_id = "";
-    String mUser_pwd = "";
-    String mUser_Name = "";
+    public String mUser_id = "";
+    public String mUser_pwd = "";
+    public String mUser_Name = "";
+    public String mUser_tel = "";
 
     Member_Value(){}
 
 
     public Member_Value(JSONObject _obj){
         try{
-            _id= _obj.getInt("_id");
-            mUser_id= _obj.getString("mUser_id");
-            mUser_pwd= _obj.getString("mUser_pwd");
-            mUser_Name= _obj.getString("mUser_Name");
+            _id= _obj.getInt("no");
+            mUser_id= _obj.getString("user_id");
+            mUser_pwd= _obj.getString("user_pwd");
+            mUser_Name= _obj.getString("user_name");
+            mUser_tel= _obj.getString("user_tel");
 
         }catch(Exception e){
             KjyLog.e(TAG, e);
@@ -38,6 +40,7 @@ public class Member_Value implements Serializable {
             mUser_id = sharedPref.getString("mUser_id", "");
             mUser_pwd = sharedPref.getString("mUser_pwd", "");
             mUser_Name = sharedPref.getString("mUser_Name", "");
+            mUser_tel = sharedPref.getString("mUser_tel", "");
 
         }catch(Exception e){
             OjyLog.e(TAG,e);

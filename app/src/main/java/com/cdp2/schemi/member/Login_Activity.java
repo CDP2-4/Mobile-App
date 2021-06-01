@@ -1,10 +1,7 @@
 package com.cdp2.schemi.member;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.JetPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,22 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
-import com.cdp2.schemi.common.HttpClass_bak;
-import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.OjyLog;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
+
 
 public class Login_Activity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "Login_Activity";
@@ -45,7 +39,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             int _sel = msg.what;
 
             switch(_sel){
-                case HttpClass_bak.ACTION_01:
+                case HttpClass.ACTION_01:
                     checkLogin((String)msg.obj);
                     break;
             }
@@ -91,7 +85,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        String _isLogin = MyCommon.get_save_SharedPreferences(this, "_isLogin");
+        String _isLogin = MyCommon.get_SharedPreferences(this, "_isLogin");
 
         if(_isLogin.equals("_isLogin")){
             Intent t = new Intent(this, MainActivity.class);
@@ -133,21 +127,11 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         String _idStr = mEt_id.getText().toString();
         String _pwdStr = mEt_pwd.getText().toString();
 
-        if(_idStr.equals(_pwdStr)){
-            Intent t = new Intent(this, MainActivity.class);
-            startActivity(t);
-            finish();
-
-
-        }else{
-            Toast.makeText(this, "아이디가 없거나 아이디/비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-        }
-
-//        HashMap<String, String> _params = new HashMap();
-//        _params.put("action", "_isLoginCheck");
-//        _params.put("u_id", _idStr);
-//        _params.put("u_pwd", _pwdStr);
-//        new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
+        HashMap<String, String> _params = new HashMap();
+        _params.put("action", "_isLoginCheck");
+        _params.put("user_id", _idStr);
+        _params.put("user_pwd", _pwdStr);
+        new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
 
     }
 

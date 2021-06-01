@@ -24,8 +24,8 @@ import java.util.Map.Entry;
  * 이 클래스는 Thread를 상속받은 클래스 입니다.
  * */
 public class HttpClass extends Thread {
-	private String TAG = "HttpClass_bak";
-	private String mUploadURL_V2 = "http://schemi.0za.kr/";
+	private String TAG = "HttpClass";
+	private String mUploadURL_V2 = "http://schemi.0za.kr/app/app_api.php";
 
 
 	int mOrder;										//요청할 명령번호 입니다.
@@ -89,6 +89,8 @@ public class HttpClass extends Thread {
 		}
 	}
 
+
+
 	private String lineEnd = "\r\n";
 	private String twoHyphens = "--";
 	private String boundary="*****";
@@ -106,10 +108,6 @@ public class HttpClass extends Thread {
 	private void httpMyInfoUpload_MultiImage(String _url) {
 		KjyLog.i(TAG, "httpMyInfoUpload_MultiImage() / _url : "+_url);
 
-		/*for(int i=0 ; i<mFileList.size() ; i++){
-			JwLog.i(TAG, "httpMyInfoUpload_MultiImage() / mFileList.get("+i+") : "+mFileList.get(i));
-		}*/
-
 		try {
 			connectUrl = new URL(_url);
 
@@ -124,6 +122,7 @@ public class HttpClass extends Thread {
 
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(conn.getOutputStream(), "utf-8"), true);
 
+
 			for(Entry<String, String> entry : mParams_map.entrySet()){
 				KjyLog.i(TAG, entry.getKey() +" : "+entry.getValue());
 
@@ -134,20 +133,17 @@ public class HttpClass extends Thread {
 				pw.write(lineEnd);
 			}
 
-
-			sendImg(conn, mDos, pw, "img", mFileList);
-
 			pw.flush();
 
-			if( mDos != null ) {
-				mDos.flush();
-				mDos.close();
+			if(mFileList != null && mFileList.size() > 0) {
+				sendImg(conn, mDos, pw, "img", mFileList);
 			}
 
-			// get response
 
 			String ch;
+			KjyLog.i(TAG, "222 conn.getResponseCode() : "+conn.getResponseCode());
 			InputStream is = conn.getInputStream();
+			KjyLog.i(TAG, "333 conn.getResponseCode() : "+conn.getResponseCode());
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 			StringBuffer b = new StringBuffer();
 
@@ -237,9 +233,10 @@ public class HttpClass extends Thread {
 				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 				KjyLog.i(TAG, "httpMyInfoUpload() / File is written");
 				mFileInputStream.close();
+				dos.close();
 			}
 		}catch (Exception e) {
-
+			KjyLog.e(TAG, e);
 		}
 	}
 

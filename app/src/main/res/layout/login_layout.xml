@@ -96,7 +96,9 @@
                 android:singleLine="true"
                 android:hint="비밀번호를 입력해주세요."
                 android:textColorHint="@color/gray"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:inputType="textPassword"
+                />
 
         </LinearLayout>
     </LinearLayout>

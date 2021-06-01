@@ -17,7 +17,7 @@ public class MyCommon {
     }
 
 
-    public static String get_save_SharedPreferences(Context _ac, String _key){
+    public static String get_SharedPreferences(Context _ac, String _key){
         String _value = "";
 
         SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
@@ -28,8 +28,6 @@ public class MyCommon {
 
 
     public static void save_UserInfo(Context _ac, Member_Value _user){
-
-
         SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_MEMBER_KEY_VALUE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -50,13 +48,9 @@ public class MyCommon {
     public static Member_Value get_UserInfo(Context _ac){
         SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_MEMBER_KEY_VALUE, Context.MODE_PRIVATE);
 
-
         Member_Value _user = new Member_Value(sharedPref);
 
-
         return _user;
-
     }
-
 
 }

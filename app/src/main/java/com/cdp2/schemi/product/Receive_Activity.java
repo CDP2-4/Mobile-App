@@ -33,7 +33,6 @@ import com.bumptech.glide.Glide;
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
-import com.cdp2.schemi.common.HttpClass_bak;
 import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.common.OjyLog;

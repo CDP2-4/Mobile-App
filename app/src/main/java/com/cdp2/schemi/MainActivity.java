@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout mLl_release;
 
     Member_Value mUser_Info;
+    String mUser_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mUser_Info = MyCommon.get_UserInfo(this);
+        mUser_id = mUser_Info.mUser_id;
 
         mTv_member_modify=findViewById(R.id.main_tv_member_modify);
         mTv_logout=findViewById(R.id.main_tv_logout);
