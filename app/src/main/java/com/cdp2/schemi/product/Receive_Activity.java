@@ -31,6 +31,7 @@ import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Member_Value;
+import com.cdp2.schemi.warehouse.Warehouse_Value;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
@@ -255,8 +256,6 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         Member_Value _user = MyCommon.get_UserInfo(this);
         String mUser_id = _user.mUser_id;
 
-        KjyLog.i(TAG, "userId: " + mUser_id);
-
         HashMap<String, String> _params = new HashMap();
         _params.put("action", "_isLoadWarehouse");
         _params.put("user_id", mUser_id);
@@ -275,7 +274,12 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
             if(_res == 0){
                 /** 성공적으로 불러왔으므로 창고 정보 출력*/
-                mWarehouse_name = _obj.getString("warehouse_name");
+                Warehouse_Value _warehouse = new Warehouse_Value(_obj.getJSONObject("info"));
+                MyCommon.save_CurrentWarehouse(this, _warehouse);
+
+                mWarehouse_name = MyCommon.get_CurrentWarehouse(this).mWarehouse_name;
+                KjyLog.i("TAG", mWarehouse_name);
+
                 mTv_warehouse_name.setText(mWarehouse_name);
             }else{
                 /** 불러오기 실패 */

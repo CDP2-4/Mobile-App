@@ -57,6 +57,6 @@ public class Member_Value implements Serializable {
                 ", mUser_id=" + mUser_id+
                 ", mUser_pwd=" + mUser_pwd  +
                 ", mUser_Name=" + mUser_Name +
-                        ", mUser_Tel=" + mUser_tel;
+                        ", mUser_tel=" + mUser_tel;
     }
 }

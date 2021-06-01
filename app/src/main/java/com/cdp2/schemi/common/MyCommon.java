@@ -64,6 +64,7 @@ public class MyCommon {
         for(int i=0 ; i<_warehouseARr01.length ; i++) {
             String _key = _warehouseARr01[i].split("=")[0];
             String _value = _warehouseARr01[i].split("=")[1];
+            KjyLog.i("save_Currentwarehouse", _key + " " + _value);
 
             editor.putString(_key, _value);
             editor.commit();
@@ -75,6 +76,7 @@ public class MyCommon {
         SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_MEMBER_KEY_VALUE, Context.MODE_PRIVATE);
 
         Warehouse_Value _warehouse = new Warehouse_Value(sharedPref);
+        KjyLog.i("CurrentWarehouse", _warehouse.mWarehouse_name);
 
         return _warehouse;
     }
