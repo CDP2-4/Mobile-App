@@ -42,6 +42,9 @@
             android:name=".member.Member_Edit_Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".warehouse.In_Out_Activity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".product.Receive_Activity"
             android:screenOrientation="portrait" />
         <activity

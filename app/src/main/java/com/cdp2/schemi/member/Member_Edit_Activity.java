@@ -42,6 +42,7 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
     EditText mEt_pwd;
     EditText mEt_pwd_re;
     TextView mTv_edit;
+    TextView mTv_popup_message;
 
     /** 서버와 통신한 후 이 핸들러로 옴 */
     @SuppressLint("HandlerLeak")
@@ -110,9 +111,13 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
         _dialog.setContentView(R.layout.popup_layout);
         _dialog.setCancelable(false);
 
-        //오류나는 부분
-        //TextView mTv_popup_message = findViewById(R.id.popup_tv_message);
-        //mTv_popup_message.setText("수정하시겠습니까?");
+//        //오류나는 부분
+//        try {
+//            mTv_popup_message = (TextView)findViewById(R.id.popup_tv_message);
+//            mTv_popup_message.setText("수정하시겠습니까?");
+//        } catch (NullPointerException e) {
+//            KjyLog.e(TAG, e);
+//        }
 
         TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);
@@ -147,6 +152,9 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
                 _params.put("user_tel", _user.mUser_tel);
                 OjyLog.i(TAG, "hash 완료");
                 new HttpClass(getApplicationContext(), HttpClass.ACTION_01, mHandler, _params).start();
+
+                _dialog.dismiss();
+                finish();
             }
         });
 
@@ -156,13 +164,12 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
     private Member_Value MakeUser(Member_Value old_user,Member_Value _user){
 
-        OjyLog.i(TAG, "현재 정보  old_user name : " + old_user.mUser_Name+"old_user tel"+old_user.mUser_tel+"old_user pwd"+old_user.mUser_pwd);
+        OjyLog.i(TAG, "현재 정보  old_user name : " + old_user.mUser_Name+" old_user tel"+old_user.mUser_tel+" old_user pwd"+old_user.mUser_pwd);
 
         mEt_id=findViewById(R.id.edit_et_id);
         mEt_name=findViewById(R.id.edit_et_name);
         mEt_tel=findViewById(R.id.edit_et_tel);
         mEt_pwd=findViewById(R.id.edit_et_pwd);
-
 
         _user.mUser_Name=mEt_name.getText().toString();
         _user.mUser_pwd=mEt_pwd.getText().toString();

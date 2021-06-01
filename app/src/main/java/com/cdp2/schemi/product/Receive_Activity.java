@@ -28,9 +28,11 @@ import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
 import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.common.MyCommon;
+import com.cdp2.schemi.common.MyPermission;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Member_Value;
+import com.cdp2.schemi.warehouse.In_Out_Activity;
 import com.cdp2.schemi.warehouse.Warehouse_Value;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
@@ -87,15 +89,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 .setAlbumLoader(new MediaLoader()).build());
         
         /** 권한 허용 */
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{android.Manifest.permission.CAMERA}, 50);
-        }
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 50);
-        }
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(Receive_Activity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 50);
-        }
+        /** 권한 허용 */
+        MyPermission _permission = new MyPermission();
+        _permission.checkPermission(getApplicationContext(), Receive_Activity.this);
 
 
         File sdcard = Environment.getExternalStorageDirectory();

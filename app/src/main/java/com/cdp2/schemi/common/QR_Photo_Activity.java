@@ -33,7 +33,7 @@ public class QR_Photo_Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        /** 원래 receive 페이지로 값 넘겨주기 */
+                        /** 원래 Activity로 값 넘겨주기 */
                         Intent qr_Str = new Intent();
                         qr_Str.setData(Uri.parse(result.getText()));
                         OjyLog.i(TAG, "result.getText() : "+result.getText());
