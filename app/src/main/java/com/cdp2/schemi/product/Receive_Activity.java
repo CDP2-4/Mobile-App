@@ -1,10 +1,8 @@
 package com.cdp2.schemi.product;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,8 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.cdp2.schemi.R;
@@ -32,8 +28,7 @@ import com.cdp2.schemi.common.MyPermission;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
 import com.cdp2.schemi.member.Member_Value;
-import com.cdp2.schemi.warehouse.In_Out_Activity;
-import com.cdp2.schemi.warehouse.Warehouse_Value;
+import com.cdp2.schemi.warehouse.In_Out_Value;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
@@ -43,7 +38,6 @@ import com.yanzhenjie.album.AlbumLoader;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -179,7 +173,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
             }
         } else if (requestCode == request_Code_Label) {
             OjyLog.i(TAG, "resultCode :"+resultCode);
-            OjyLog.i(TAG, "data.getDataStrin :"+data.getDataString() );
+            OjyLog.i(TAG, "data.getDataString :"+data.getDataString() );
 
             /** 라벨 촬영이 완료된 경우 */
             if (resultCode == RESULT_OK) {
@@ -270,10 +264,10 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
             if(_res == 0){
                 /** 성공적으로 불러왔으므로 창고 정보 출력*/
-                Warehouse_Value _warehouse = new Warehouse_Value(_obj.getJSONObject("info"));
-                MyCommon.save_CurrentWarehouse(this, _warehouse);
+                In_Out_Value _warehouse = new In_Out_Value(_obj.getJSONObject("info"));
+                MyCommon.save_InOutInfo(this, _warehouse);
 
-                mWarehouse_name = MyCommon.get_CurrentWarehouse(this).mWarehouse_name;
+                mWarehouse_name = MyCommon.get_InOutInfo(this).mWarehouse_name;
                 KjyLog.i("TAG", mWarehouse_name);
 
                 mTv_warehouse_name.setText(mWarehouse_name);

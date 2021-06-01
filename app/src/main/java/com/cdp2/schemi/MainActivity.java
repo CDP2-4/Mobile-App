@@ -88,19 +88,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void showLogOut(){
-        AlertDialog.Builder _alert = new AlertDialog.Builder(this);
-        _alert.setTitle("로그아웃");
-        _alert.setMessage("로그아웃 하시겠습니까?");
-        _alert.setNegativeButton("아니오", null);
-        _alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        _alert.show();
-    }
+//    private void showLogOut(){
+//        AlertDialog.Builder _alert = new AlertDialog.Builder(this);
+//        _alert.setTitle("로그아웃");
+//        _alert.setMessage("로그아웃 하시겠습니까?");
+//        _alert.setNegativeButton("아니오", null);
+//        _alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        _alert.show();
+//    }
 
 
     private void showLogout_Custom(){

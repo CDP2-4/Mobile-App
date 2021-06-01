@@ -9,21 +9,25 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class Warehouse_Value implements Serializable {
-    String TAG = "Warehouse_Value";
+public class In_Out_Value implements Serializable {
+    String TAG = "In_Out_Value";
 
     int _id = 0;
+    public String mUser_id = "";
+    public String mUser_Name = "";
     public String mWarehouse_name = "";
     public String mIn_time = "";
     public String mOut_time = "";
 
-    public Warehouse_Value(){}
+    public In_Out_Value(){}
 
 
-    public Warehouse_Value(JSONObject _obj){
+    public In_Out_Value(JSONObject _obj){
         KjyLog.i(TAG, _obj.toString());
         try{
             _id= _obj.getInt("no");
+            mUser_id= _obj.getString("user_id");
+            mUser_Name= _obj.getString("user_name");
             mWarehouse_name= _obj.getString("warehouse_name");
             mIn_time= _obj.getString("in_time");
             mOut_time= _obj.getString("out_time");
@@ -32,9 +36,11 @@ public class Warehouse_Value implements Serializable {
         }
     }
 
-    public Warehouse_Value( SharedPreferences sharedPref ){
+    public In_Out_Value(SharedPreferences sharedPref ){
         try{
             _id = Integer.valueOf( sharedPref.getString("_id", ""));
+            mUser_id = sharedPref.getString("mUser_id", "");
+            mUser_Name = sharedPref.getString("mUser_Name", "");
             mWarehouse_name = sharedPref.getString("mWarehouse_name", "");
             mIn_time = sharedPref.getString("mIn_time", "");
             mOut_time = sharedPref.getString("mOut_time", "");
@@ -51,6 +57,8 @@ public class Warehouse_Value implements Serializable {
     public String toString() {
         return
                 "_id=" + _id +
+                        ", mUser_id=" + mUser_id+
+                        ", mUser_Name=" + mUser_Name+
                         ", mWarehouse_name=" + mWarehouse_name+
                         ", mIn_time=" + mIn_time  +
                         ", mOut_time=" + mOut_time;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.cdp2.schemi.member.Member_Value;
-import com.cdp2.schemi.warehouse.Warehouse_Value;
+import com.cdp2.schemi.warehouse.In_Out_Value;
 
 public class MyCommon {
 
@@ -53,8 +53,8 @@ public class MyCommon {
         return _user;
     }
 
-    public static void save_CurrentWarehouse(Context _ac, Warehouse_Value _warehouse){
-        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_MEMBER_KEY_VALUE, Context.MODE_PRIVATE);
+    public static void save_InOutInfo(Context _ac, In_Out_Value _warehouse){
+        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_INOUT_KEY_VALUE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         String _warehouseStr = _warehouse.toString();
@@ -64,7 +64,7 @@ public class MyCommon {
         for(int i=0 ; i<_warehouseARr01.length ; i++) {
             String _key = _warehouseARr01[i].split("=")[0];
             String _value = _warehouseARr01[i].split("=")[1];
-            KjyLog.i("save_Currentwarehouse", _key + " " + _value);
+            KjyLog.i("save_InOutInfo", _key + " " + _value);
 
             editor.putString(_key, _value);
             editor.commit();
@@ -72,11 +72,11 @@ public class MyCommon {
     }
 
 
-    public static Warehouse_Value get_CurrentWarehouse(Context _ac){
-        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_MEMBER_KEY_VALUE, Context.MODE_PRIVATE);
+    public static In_Out_Value get_InOutInfo(Context _ac){
+        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_INOUT_KEY_VALUE, Context.MODE_PRIVATE);
 
-        Warehouse_Value _warehouse = new Warehouse_Value(sharedPref);
-        KjyLog.i("CurrentWarehouse", _warehouse.mWarehouse_name);
+        In_Out_Value _warehouse = new In_Out_Value(sharedPref);
+        KjyLog.i("get_InOutInfo", _warehouse.mWarehouse_name);
 
         return _warehouse;
     }
