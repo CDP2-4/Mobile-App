@@ -14,7 +14,7 @@
         android:gravity="right"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        android:text="*는 필수 항목 입니다."
+        android:text="아이디는 변경 불가합니다."
         android:textColor="@color/colorMain"
         android:textSize="12dp"
         >
