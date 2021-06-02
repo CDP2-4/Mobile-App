@@ -1,7 +1,9 @@
 package com.cdp2.schemi.member;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,9 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
+import com.cdp2.schemi.common.I_VALUE;
 import com.cdp2.schemi.common.KjyLog;
 import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.OjyLog;
+import com.cdp2.schemi.warehouse.In_Out_Value;
 
 import org.json.JSONObject;
 

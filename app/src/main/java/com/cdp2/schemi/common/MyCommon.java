@@ -64,6 +64,7 @@ public class MyCommon {
         for(int i=0 ; i<_warehouseARr01.length ; i++) {
             String _key = _warehouseARr01[i].split("=")[0];
             String _value = _warehouseARr01[i].split("=")[1];
+
             KjyLog.i("save_InOutInfo", _key + " " + _value);
 
             editor.putString(_key, _value);

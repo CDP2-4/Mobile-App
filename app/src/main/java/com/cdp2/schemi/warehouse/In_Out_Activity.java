@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -110,6 +111,7 @@ public class In_Out_Activity extends AppCompatActivity {
                 _dialog.dismiss();
                 finish();
 
+                /** 입출입 정보 저장 */
                 Toast.makeText(In_Out_Activity.this, "창고 입출입이 기록되었습니다.", Toast.LENGTH_SHORT).show();
 
                 Intent t = new Intent(In_Out_Activity.this, MainActivity.class);
@@ -132,31 +134,24 @@ public class In_Out_Activity extends AppCompatActivity {
 
         In_Out_Value _inout = MyCommon.get_InOutInfo(this);
         HashMap<String, String> _params = new HashMap();
-        KjyLog.i(TAG, "mOut_time: "+ _inout.mOut_time);
+        KjyLog.i(TAG, "warehouse_no: "+ _inout.mWarehouse_no + " / QR: " + mQr_Text);
+        KjyLog.i(TAG, "time: "+ _inout.mOut_time);
+        KjyLog.i(TAG, "isOut: "+ (_inout.mWarehouse_no == Integer.valueOf(mQr_Text) && (_inout.mOut_time == null || _inout.mOut_time.equals("null") || _inout.mOut_time.isEmpty() )));
 
-        if (_inout.mOut_time.equals("")) {
-            /** 창고 나갈 때: out_time이 null이고 out_time 업데이트 */
-            KjyLog.i(TAG, "창고 나갈 때");
+        if ((_inout.mWarehouse_no == Integer.valueOf(mQr_Text) && (_inout.mOut_time == null || _inout.mOut_time.equals("null") || _inout.mOut_time.isEmpty() ))) {
+            /** 창고 나갈 때: out_time 업데이트 */
             _params.put("action", "_isOut");
             _params.put("user_id", mUser_id);
             _params.put("out_time", _time);
             new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
-        } else {
-            /** 창고 들어갈 때: out_time이 null이 아니고 새로운 데이터 삽입 */
-            // 이전의 out_time은 초기화 해줌
-//            SharedPreferences sharedPref = this.getSharedPreferences(I_VALUE.SP_INOUT_KEY_VALUE, Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sharedPref.edit();
-//            editor.putString("mIn_time", "");
-//            editor.putString("mOut_time", "");
-//            editor.putString("mWarehouse_name", "");
-//            editor.commit();
 
-            KjyLog.i(TAG, "창고 들어갈 때");
+        } else {
+            /** 창고 들어갈 때: 새로운 데이터 삽입 */
             _params.put("action", "_isIn");
             _params.put("user_id", mUser_id);
             _params.put("user_name", mUser_name);
             _params.put("in_time", _time);
-            _params.put("warehouse_num", mQr_Text);
+            _params.put("warehouse_no", mQr_Text);
             new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
         }
     }
@@ -176,6 +171,8 @@ public class In_Out_Activity extends AppCompatActivity {
                 /** 성공적으로 불러왔으므로 창고 정보 출력*/
                 In_Out_Value _warehouse = new In_Out_Value(_obj.getJSONObject("info"));
                 MyCommon.save_InOutInfo(this, _warehouse);
+
+                KjyLog.i(TAG, "**** 통신 후 warehouse: "+ _warehouse.mIn_time + " " +_warehouse.mOut_time);//코드 어디고??
 
             }else{
                 /** 불러오기 실패 */

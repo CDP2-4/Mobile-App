@@ -26,6 +26,7 @@ import com.cdp2.schemi.member.Member_Edit_Activity;
 import com.cdp2.schemi.member.Member_Value;
 import com.cdp2.schemi.product.Receive_Activity;
 import com.cdp2.schemi.warehouse.In_Out_Activity;
+import com.cdp2.schemi.warehouse.In_Out_Value;
 
 import java.lang.reflect.Member;
 
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         _tvOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /** 자동 로그인 해제 */
                 SharedPreferences sharedPref = getSharedPreferences(I_VALUE.SP_KEY_VALUE, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("_isLogin", "__empty__");

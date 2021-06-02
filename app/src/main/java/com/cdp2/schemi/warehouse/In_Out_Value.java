@@ -12,12 +12,13 @@ import java.io.Serializable;
 public class In_Out_Value implements Serializable {
     String TAG = "In_Out_Value";
 
-    int _id = 0;
-    public String mUser_id = "";
-    public String mUser_Name = "";
-    public String mWarehouse_name = "";
-    public String mIn_time = "";
-    public String mOut_time = "";
+    public static int _id = 0;
+    public static String mUser_id = "";
+    public static String mUser_Name = "";
+    public static int mWarehouse_no= 0;
+    public static String mWarehouse_name = "";
+    public static String mIn_time = "";
+    public static String mOut_time = "";
 
     public In_Out_Value(){}
 
@@ -28,6 +29,7 @@ public class In_Out_Value implements Serializable {
             _id= _obj.getInt("no");
             mUser_id= _obj.getString("user_id");
             mUser_Name= _obj.getString("user_name");
+            mWarehouse_no= _obj.getInt("warehouse_no");
             mWarehouse_name= _obj.getString("warehouse_name");
             mIn_time= _obj.getString("in_time");
             mOut_time= _obj.getString("out_time");
@@ -41,6 +43,7 @@ public class In_Out_Value implements Serializable {
             _id = Integer.valueOf( sharedPref.getString("_id", ""));
             mUser_id = sharedPref.getString("mUser_id", "");
             mUser_Name = sharedPref.getString("mUser_Name", "");
+            mWarehouse_no = Integer.valueOf( sharedPref.getString("mWarehouse_no", ""));
             mWarehouse_name = sharedPref.getString("mWarehouse_name", "");
             mIn_time = sharedPref.getString("mIn_time", "");
             mOut_time = sharedPref.getString("mOut_time", "");
@@ -51,6 +54,16 @@ public class In_Out_Value implements Serializable {
     }
 
 
+    public static void initialize() {
+        _id= 0;
+        mUser_id= "";
+        mUser_Name= "";
+        mWarehouse_no= 0;
+        mWarehouse_name= "";
+        mIn_time= "";
+        mOut_time= "";
+    }
+
 
 
     @Override
@@ -59,6 +72,7 @@ public class In_Out_Value implements Serializable {
                 "_id=" + _id +
                         ", mUser_id=" + mUser_id+
                         ", mUser_Name=" + mUser_Name+
+                        ", mWarehouse_no=" + mWarehouse_no+
                         ", mWarehouse_name=" + mWarehouse_name+
                         ", mIn_time=" + mIn_time  +
                         ", mOut_time=" + mOut_time;
