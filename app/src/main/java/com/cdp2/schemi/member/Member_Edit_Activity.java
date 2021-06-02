@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -33,6 +34,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class Member_Edit_Activity extends AppCompatActivity implements View.OnClickListener{
+    //기능은 구현 O 지금 PHP파일에 _isEditValue 이게 없어진 상황이라 DB 수정이 안됨 PHP파일에 추가 필요
+
+
     String TAG = "Member_Edit_Activity";
 
     TextView mTv_notice;
@@ -42,7 +46,6 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
     EditText mEt_pwd;
     EditText mEt_pwd_re;
     TextView mTv_edit;
-    TextView mTv_popup_message;
 
     /** 서버와 통신한 후 이 핸들러로 옴 */
     @SuppressLint("HandlerLeak")
@@ -94,15 +97,27 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
     private void checkPassword() {
         String _pwdStr = mEt_pwd.getText().toString();
         String _pwdStr_re = mEt_pwd_re.getText().toString();
 
-        if(_pwdStr.equals(_pwdStr_re)) {
-            showConfirm_Custom();
-        } else {
-            Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+        //비밀번호 공란인채로 변경시 NULL이 DB에 저장됨
+        //빈칸 NULL이면 변경 불가
+        if(TextUtils.isEmpty(_pwdStr)||TextUtils.isEmpty(_pwdStr_re))
+        {
+            Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
         }
+        else{
+            //둘다 값이 있고
+            if(_pwdStr.equals(_pwdStr_re)) {
+                //그게 같으면 변경 O
+                showConfirm_Custom();
+            } else {
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     private void showConfirm_Custom(){
@@ -111,13 +126,11 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
         _dialog.setContentView(R.layout.popup_layout);
         _dialog.setCancelable(false);
 
-//        //오류나는 부분
-//        try {
-//            mTv_popup_message = (TextView)findViewById(R.id.popup_tv_message);
-//            mTv_popup_message.setText("수정하시겠습니까?");
-//        } catch (NullPointerException e) {
-//            KjyLog.e(TAG, e);
-//        }
+        TextView message;
+        message = (TextView) _dialog.findViewById(R.id.popup_tv_message);
+        message.setText("수정하시겠습니까?");
+
+
 
         TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);
@@ -153,15 +166,49 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
                 OjyLog.i(TAG, "hash 완료");
                 new HttpClass(getApplicationContext(), HttpClass.ACTION_01, mHandler, _params).start();
 
+
                 _dialog.dismiss();
-                finish();
+                showCheck_Custom();
+
+
+
             }
         });
 
         _dialog.show();
 
     }
+    private void showCheck_Custom(){
+        OjyLog.i(TAG, "확인 커스텀창 들어옴");
+        Dialog _dialog = new Dialog(this);
+        _dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        _dialog.setContentView(R.layout.popup_layout_confirm);
+        _dialog.setCancelable(false);
 
+        TextView message;
+        message = (TextView) _dialog.findViewById(R.id.popup_confirm_tv_message);
+        message.setText("수정되었습니다.");
+
+
+        TextView _tvOk = _dialog.findViewById(R.id.popup_confirm_tv_okay);
+
+
+        _tvOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                _dialog.dismiss();
+
+                finish();
+
+            }
+        });
+
+        _dialog.show();
+
+    }
     private Member_Value MakeUser(Member_Value old_user,Member_Value _user){
 
         OjyLog.i(TAG, "현재 정보  old_user name : " + old_user.mUser_Name+" old_user tel"+old_user.mUser_tel+" old_user pwd"+old_user.mUser_pwd);
