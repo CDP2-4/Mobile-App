@@ -168,7 +168,7 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
 
                 _dialog.dismiss();
-                showCheck_Custom();
+
 
 
 
@@ -200,7 +200,8 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
 
                 _dialog.dismiss();
-
+                Intent t = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(t);
                 finish();
 
             }
@@ -245,15 +246,16 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
             if (_res == 0) {
 
-                Toast.makeText(this, "수정 성공", Toast.LENGTH_SHORT).show();
-
+                //확인 완료 다이어로그 함수로
+                //Toast.makeText(this, "수정 성공", Toast.LENGTH_SHORT).show();
+                showCheck_Custom();
 
                 Intent t = new Intent(this, MainActivity.class);
                 startActivity(t);
                 finish();
 
             } else {
-                /** 아이디 혹은 비밀번호가 잘못됨.*/
+                /*res 0 아니면 서버 수정 안된거임*/
                 Toast.makeText(this, "수정 실패", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
