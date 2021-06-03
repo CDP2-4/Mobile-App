@@ -87,8 +87,10 @@ public class In_Out_Activity extends AppCompatActivity {
         Dialog _dialog = new Dialog(this);
         _dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         _dialog.setContentView(R.layout.popup_layout);
+        _dialog.setCancelable(false);TextView message;
 
-        _dialog.setCancelable(false);
+        message = (TextView) _dialog.findViewById(R.id.popup_tv_message);
+        message.setText("입출입을 기록하시겠습니까?");
 
         TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);
