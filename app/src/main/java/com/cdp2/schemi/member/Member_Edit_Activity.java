@@ -163,6 +163,7 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
                 _params.put("user_pwd", _user.mUser_pwd);
                 _params.put("user_name", _user.mUser_Name);
                 _params.put("user_tel", _user.mUser_tel);
+                _params.put("company_code", _user.mCompany_code);
                 OjyLog.i(TAG, "hash 완료");
                 new HttpClass(getApplicationContext(), HttpClass.ACTION_01, mHandler, _params).start();
 
@@ -224,6 +225,7 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
         _user.mUser_tel=mEt_tel.getText().toString();
         _user._id = old_user._id;
         _user.mUser_id = old_user.mUser_id;
+        _user.mCompany_code = old_user.mCompany_code;
 
 
         OjyLog.i(TAG, "저장될 정보  _user name : " + _user.mUser_Name+"_user tel"+_user.mUser_tel+"_user pwd"+_user.mUser_pwd);

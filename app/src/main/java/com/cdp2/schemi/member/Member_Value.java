@@ -17,6 +17,7 @@ public class Member_Value implements Serializable {
     public String mUser_pwd = "";
     public String mUser_Name = "";
     public String mUser_tel = "";
+    public String mCompany_code = "";
 
     public Member_Value(){}
 
@@ -29,6 +30,7 @@ public class Member_Value implements Serializable {
             mUser_pwd= _obj.getString("user_pwd");
             mUser_Name= _obj.getString("user_name");
             mUser_tel= _obj.getString("user_tel");
+            mCompany_code= _obj.getString("company_code");
         }catch(Exception e){
             KjyLog.e(TAG, e);
         }
@@ -41,6 +43,7 @@ public class Member_Value implements Serializable {
             mUser_pwd = sharedPref.getString("mUser_pwd", "");
             mUser_Name = sharedPref.getString("mUser_Name", "");
             mUser_tel = sharedPref.getString("mUser_tel", "");
+            mCompany_code = sharedPref.getString("mCompany_code", "");
 
         }catch(Exception e){
             OjyLog.e(TAG,e);
@@ -57,6 +60,7 @@ public class Member_Value implements Serializable {
                 ", mUser_id=" + mUser_id+
                 ", mUser_pwd=" + mUser_pwd  +
                 ", mUser_Name=" + mUser_Name +
-                        ", mUser_tel=" + mUser_tel;
+                        ", mUser_tel=" + mUser_tel +
+                        ", mCompany_code=" + mCompany_code;
     }
 }

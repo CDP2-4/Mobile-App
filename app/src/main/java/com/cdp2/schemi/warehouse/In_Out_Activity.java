@@ -131,6 +131,7 @@ public class In_Out_Activity extends AppCompatActivity {
         Member_Value _user = MyCommon.get_UserInfo(this);
         String mUser_id = _user.mUser_id;
         String mUser_name = _user.mUser_Name;
+        String mCompany_code = _user.mCompany_code;
         Date mTime = new Date();
         String _time = _format.format(mTime); // 현재 시각
 
@@ -140,6 +141,7 @@ public class In_Out_Activity extends AppCompatActivity {
         _params.put("user_name", mUser_name);
         _params.put("warehouse_no", mQr_Text);
         _params.put("in_time", _time);
+        _params.put("company_code", mCompany_code);
         new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
 
     }

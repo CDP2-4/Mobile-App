@@ -32,6 +32,7 @@ public class MyCommon {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         String _userStr = _user.toString();
+        KjyLog.i("save_UserInfo", _userStr);
         String _userARr01[] = _userStr.split(", ");
 
 
