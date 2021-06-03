@@ -201,9 +201,10 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
 
                 _dialog.dismiss();
+                finish();
+
                 Intent t = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(t);
-                finish();
 
             }
         });
@@ -252,9 +253,9 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
                 //Toast.makeText(this, "수정 성공", Toast.LENGTH_SHORT).show();
                 showCheck_Custom();
 
-                Intent t = new Intent(this, MainActivity.class);
-                startActivity(t);
-                finish();
+                //Intent t = new Intent(this, MainActivity.class);
+                //startActivity(t);
+                //finish();
 
             } else {
                 /*res 0 아니면 서버 수정 안된거임*/
