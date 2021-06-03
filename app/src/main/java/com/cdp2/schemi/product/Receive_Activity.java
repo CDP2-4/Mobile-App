@@ -81,8 +81,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
         Album.initialize(AlbumConfig.newBuilder(this)
                 .setAlbumLoader(new MediaLoader()).build());
-        
-        /** 권한 허용 */
+
         /** 권한 허용 */
         MyPermission _permission = new MyPermission();
         _permission.checkPermission(getApplicationContext(), Receive_Activity.this);

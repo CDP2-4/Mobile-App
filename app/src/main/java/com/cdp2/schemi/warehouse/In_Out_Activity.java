@@ -132,28 +132,14 @@ public class In_Out_Activity extends AppCompatActivity {
         Date mTime = new Date();
         String _time = _format.format(mTime); // 현재 시각
 
-        In_Out_Value _inout = MyCommon.get_InOutInfo(this);
         HashMap<String, String> _params = new HashMap();
-        KjyLog.i(TAG, "warehouse_no: "+ _inout.mWarehouse_no + " / QR: " + mQr_Text);
-        KjyLog.i(TAG, "time: "+ _inout.mOut_time);
-        KjyLog.i(TAG, "isOut: "+ (_inout.mWarehouse_no == Integer.valueOf(mQr_Text) && (_inout.mOut_time == null || _inout.mOut_time.equals("null") || _inout.mOut_time.isEmpty() )));
+        _params.put("action", "_isInOutCheck");
+        _params.put("user_id", mUser_id);
+        _params.put("user_name", mUser_name);
+        _params.put("warehouse_no", mQr_Text);
+        _params.put("in_time", _time);
+        new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
 
-        if ((_inout.mWarehouse_no == Integer.valueOf(mQr_Text) && (_inout.mOut_time == null || _inout.mOut_time.equals("null") || _inout.mOut_time.isEmpty() ))) {
-            /** 창고 나갈 때: out_time 업데이트 */
-            _params.put("action", "_isOut");
-            _params.put("user_id", mUser_id);
-            _params.put("out_time", _time);
-            new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
-
-        } else {
-            /** 창고 들어갈 때: 새로운 데이터 삽입 */
-            _params.put("action", "_isIn");
-            _params.put("user_id", mUser_id);
-            _params.put("user_name", mUser_name);
-            _params.put("in_time", _time);
-            _params.put("warehouse_no", mQr_Text);
-            new HttpClass(this, HttpClass.ACTION_01, mHandler, _params).start();
-        }
     }
 
 

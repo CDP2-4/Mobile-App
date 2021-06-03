@@ -141,7 +141,9 @@ public class HttpClass extends Thread {
 
 
 			String ch;
+			KjyLog.i(TAG, "응답코드1: "+ conn.getResponseCode());
 			InputStream is = conn.getInputStream();
+			KjyLog.i(TAG, "응답코드2: "+ conn.getResponseCode());
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 			StringBuffer b = new StringBuffer();
 

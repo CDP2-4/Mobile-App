@@ -247,6 +247,7 @@ public class Member_Edit_Activity extends AppCompatActivity implements View.OnCl
 
                 Toast.makeText(this, "수정 성공", Toast.LENGTH_SHORT).show();
 
+
                 Intent t = new Intent(this, MainActivity.class);
                 startActivity(t);
                 finish();
