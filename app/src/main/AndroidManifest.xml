@@ -51,6 +51,10 @@
             android:name=".common.QR_Photo_Activity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".product.Release_Activity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.cdp2.schemi.fileprovider"

@@ -155,6 +155,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "QR 촬영과 라벨 촬영을 모두 완료해주세요.", Toast.LENGTH_SHORT).show();
             } else {
 //                Toast.makeText(this, "Ok!", Toast.LENGTH_SHORT).show();
+
                 showSubmit_Custom();
             }
         }

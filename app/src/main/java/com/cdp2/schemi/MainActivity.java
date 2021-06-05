@@ -25,6 +25,7 @@ import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Edit_Activity;
 import com.cdp2.schemi.member.Member_Value;
 import com.cdp2.schemi.product.Receive_Activity;
+import com.cdp2.schemi.product.Release_Activity;
 import com.cdp2.schemi.warehouse.In_Out_Activity;
 import com.cdp2.schemi.warehouse.In_Out_Value;
 
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(v == mLl_release) {
-            Intent t = new Intent(MainActivity.this, QR_Photo_Activity.class);
+            Intent t = new Intent(MainActivity.this, Release_Activity.class);
             startActivityForResult(t, request_Code);
         }
     }
