@@ -164,6 +164,15 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         }
         if(v == mTv_submit) {
             showSubmit_Custom();
+
+            /** QR 촬영과 라벨 촬영이 모두 완료된 후에만 팝업 출력 */
+            if(!_isShootQr || !_isShootLabel) {
+                Toast.makeText(this, "QR 촬영과 라벨 촬영을 모두 완료해주세요.", Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(this, "Ok!", Toast.LENGTH_SHORT).show();
+
+                showSubmit_Custom();
+            }
         }
 
 //        if(v == mTv_submit) {
