@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.cdp2.schemi.member.Member_Value;
+import com.cdp2.schemi.product.Product_Value;
 import com.cdp2.schemi.warehouse.In_Out_Value;
 
 public class MyCommon {
@@ -81,6 +82,36 @@ public class MyCommon {
         KjyLog.i("get_InOutInfo", _warehouse.mWarehouse_name);
 
         return _warehouse;
+    }
+
+
+    public static void save_ProductInfo(Context _ac, In_Out_Value _product){
+        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_PRODUCT_KEY_VALUE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        String _productStr = _product.toString();
+        String _productARr01[] = _productStr.split(", ");
+
+
+        for(int i=0 ; i<_productARr01.length ; i++) {
+            String _key = _productARr01[i].split("=")[0];
+            String _value = _productARr01[i].split("=")[1];
+
+            KjyLog.i("save_ProductInfo", _key + " " + _value);
+
+            editor.putString(_key, _value);
+            editor.commit();
+        }
+    }
+
+
+    public static Product_Value get_ProductInfo(Context _ac){
+        SharedPreferences sharedPref = _ac.getSharedPreferences(I_VALUE.SP_PRODUCT_KEY_VALUE, Context.MODE_PRIVATE);
+
+        Product_Value _product = new Product_Value(sharedPref);
+        KjyLog.i("get_ProductInfo", _product.mProduct_QR);
+
+        return _product;
     }
 
 }

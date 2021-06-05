@@ -34,7 +34,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class Member_Edit_Activity extends AppCompatActivity implements View.OnClickListener{
-    //기능은 구현 O 지금 PHP파일에 _isEditValue 이게 없어진 상황이라 DB 수정이 안됨 PHP파일에 추가 필요
 
 
     String TAG = "Member_Edit_Activity";

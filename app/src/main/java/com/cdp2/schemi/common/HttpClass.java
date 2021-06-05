@@ -122,7 +122,6 @@ public class HttpClass extends Thread {
 
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(conn.getOutputStream(), "utf-8"), true);
 
-
 			for(Entry<String, String> entry : mParams_map.entrySet()){
 				KjyLog.i(TAG, entry.getKey() +" : "+entry.getValue());
 

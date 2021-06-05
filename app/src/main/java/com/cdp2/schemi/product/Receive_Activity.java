@@ -47,6 +47,8 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     int request_Code_Label = 2;
     boolean _isShootQr = false;
     boolean _isShootLabel = false;
+    String _qrText = "";
+    String _fileName = "";
 
     TextView mTv_warehouse_name;
     TextView mTv_qr_photo;
@@ -55,6 +57,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
     ImageView mIv_label_photo_image;
 
     File file;
+    ArrayList<String> _fileList = new ArrayList<>();
 
 
     /** 서버와 통신한 후 이 핸들러로 옴 */
@@ -67,6 +70,20 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
             switch(_sel){
                 case HttpClass.ACTION_01:
                     requestWarehouse((String)msg.obj);
+                    break;
+            }
+        }
+    };
+
+    @SuppressLint("HandlerLeak")
+    Handler mHandler_send = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            int _sel = msg.what;
+
+            switch(_sel){
+                case HttpClass.ACTION_01:
+                    processResult((String)msg.obj);
                     break;
             }
         }
@@ -122,8 +139,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                     .onResult(new Action<String>() {
                         @Override
                         public void onAction(@NonNull String result) {
-                            OjyLog.i(TAG, "onResult() / result : "+result);
-
+                            KjyLog.i(TAG, "onResult() / result : "+result);
+                            String _str[] = result.split("/");
+                            _fileName = _str[5];
 
                             Glide.with(Receive_Activity.this)
                                     .load(result)
@@ -131,11 +149,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                                     .into(mIv_label_photo_image);
 
 
-
-                            ArrayList<String> _fileList = new ArrayList<>();
                             _fileList.add( result );
-                            new HttpClass(Receive_Activity.this, HttpClass.ACTION_01, null, _fileList, null).start();
-
 
 
                         }
@@ -143,21 +157,24 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                     .onCancel(new Action<String>() {
                         @Override
                         public void onAction(@NonNull String result) {
-                            OjyLog.i(TAG, "onCancel() / result : "+result);
+                            KjyLog.i(TAG, "onCancel() / result : "+result);
                         }
                     })
                     .start();
         }
-
         if(v == mTv_submit) {
-            /** QR 촬영과 라벨 촬영이 모두 완료된 후에만 팝업 출력 */
-            if(!_isShootQr || !_isShootLabel) {
-                Toast.makeText(this, "QR 촬영과 라벨 촬영을 모두 완료해주세요.", Toast.LENGTH_SHORT).show();
-            } else {
-//                Toast.makeText(this, "Ok!", Toast.LENGTH_SHORT).show();
-                showSubmit_Custom();
-            }
+            showSubmit_Custom();
         }
+
+//        if(v == mTv_submit) {
+//            /** QR 촬영과 라벨 촬영이 모두 완료된 후에만 팝업 출력 */
+//            if(!_isShootQr || !_isShootLabel) {
+//                Toast.makeText(this, "QR 촬영과 라벨 촬영을 모두 완료해주세요.", Toast.LENGTH_SHORT).show();
+//            } else {
+////                Toast.makeText(this, "Ok!", Toast.LENGTH_SHORT).show();
+//                showSubmit_Custom();
+//            }
+//        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -165,14 +182,15 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
         if (requestCode == request_Code_Qr) {
             /** QR 코드 촬영이 완료된 경우 */
             if (resultCode == RESULT_OK) {
-                mTv_qr_photo.setText(data.getData().toString());
+                _qrText = data.getData().toString();
+                mTv_qr_photo.setText(_qrText);
                 _isShootQr = true;
             } else {
                 Toast.makeText(Receive_Activity.this, "failed", Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == request_Code_Label) {
-            OjyLog.i(TAG, "resultCode :"+resultCode);
-            OjyLog.i(TAG, "data.getDataString :"+data.getDataString() );
+            KjyLog.i(TAG, "resultCode :"+resultCode);
+            KjyLog.i(TAG, "data.getDataString :"+data.getDataString() );
 
             /** 라벨 촬영이 완료된 경우 */
             if (resultCode == RESULT_OK) {
@@ -180,6 +198,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 options.inSampleSize = 8;
                 Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
                 mIv_label_photo_image.setImageBitmap(bitmap);
+                _isShootLabel = true;
             } else {
                 Toast.makeText(Receive_Activity.this, "failed", Toast.LENGTH_SHORT).show();
             }
@@ -209,6 +228,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 _dialog.dismiss();
 
                 /** 서버로 데이터 전송 */
+                sendData();
                 finish();
             }
         });
@@ -273,6 +293,48 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
             }else{
                 /** 불러오기 실패 */
                 Toast.makeText(this, "창고 정보를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            KjyLog.e(TAG, e);
+        }
+
+    }
+
+    private void sendData() {
+        Member_Value _user = MyCommon.get_UserInfo(this);
+        In_Out_Value _inout = MyCommon.get_InOutInfo(this);
+        String mUser_id = _user.mUser_id;
+        String mCompany_code = _user.mCompany_code;
+        String mWarehouse_no = Integer.toString(_inout.mWarehouse_no);
+        KjyLog.i(TAG, "sendData()");
+
+        HashMap<String, String> _params = new HashMap();
+        _params.put("action", "_isWarehousing");
+        _params.put("product_QR", _qrText);
+        _params.put("warehouse_no", mWarehouse_no);
+        _params.put("user_id", mUser_id);
+        _params.put("warehousing_label", _fileName);
+        _params.put("company_code", mCompany_code);
+        new HttpClass(Receive_Activity.this, HttpClass.ACTION_01, mHandler_send, _fileList, _params).start();
+
+    }
+
+    private void processResult(String _str) {
+        KjyLog.i(TAG, "processResult() / _str : "+_str);
+        String mWarehouse_name = "";
+
+        try {
+            JSONObject _obj = new JSONObject(_str);
+
+            int _res = _obj.getInt("res");
+            KjyLog.i(TAG, "res: " + _res);
+
+            if(_res == 0){
+                /** 성공적으로 입고 처리함*/
+                Toast.makeText(Receive_Activity.this, "성공적으로 입고 처리하였습니다.", Toast.LENGTH_SHORT).show();
+            }else{
+                /** 입고 처리 실패 */
+                Toast.makeText(this, "입고 처리에 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
             KjyLog.e(TAG, e);
