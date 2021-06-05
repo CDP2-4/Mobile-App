@@ -90,7 +90,7 @@ public class In_Out_Activity extends AppCompatActivity {
         _dialog.setCancelable(false);TextView message;
 
         message = (TextView) _dialog.findViewById(R.id.popup_tv_message);
-        message.setText("출고 처리 하시겠습니까?");
+        message.setText("입출입 하시겠습니까?");
 
         TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);

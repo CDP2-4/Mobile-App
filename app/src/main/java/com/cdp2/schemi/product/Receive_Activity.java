@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.cdp2.schemi.MainActivity;
 import com.cdp2.schemi.R;
 import com.cdp2.schemi.common.HttpClass;
 import com.cdp2.schemi.common.KjyLog;
@@ -27,6 +28,7 @@ import com.cdp2.schemi.common.MyCommon;
 import com.cdp2.schemi.common.MyPermission;
 import com.cdp2.schemi.common.OjyLog;
 import com.cdp2.schemi.common.QR_Photo_Activity;
+import com.cdp2.schemi.member.Login_Activity;
 import com.cdp2.schemi.member.Member_Value;
 import com.cdp2.schemi.warehouse.In_Out_Value;
 import com.yanzhenjie.album.Action;
@@ -150,6 +152,7 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
 
                             _fileList.add( result );
+                            _isShootLabel = true;
 
 
                         }
@@ -174,16 +177,6 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
                 showSubmit_Custom();
             }
         }
-
-//        if(v == mTv_submit) {
-//            /** QR 촬영과 라벨 촬영이 모두 완료된 후에만 팝업 출력 */
-//            if(!_isShootQr || !_isShootLabel) {
-//                Toast.makeText(this, "QR 촬영과 라벨 촬영을 모두 완료해주세요.", Toast.LENGTH_SHORT).show();
-//            } else {
-////                Toast.makeText(this, "Ok!", Toast.LENGTH_SHORT).show();
-//                showSubmit_Custom();
-//            }
-//        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -221,6 +214,10 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
         _dialog.setCancelable(false);
 
+        TextView message;
+        message = (TextView) _dialog.findViewById(R.id.popup_tv_message);
+        message.setText("입고하시겠습니까?");
+
         TextView _tvCancel = _dialog.findViewById(R.id.popup_tv_cancel);
         TextView _tvOk = _dialog.findViewById(R.id.popup_tv_okay);
 
@@ -238,6 +235,9 @@ public class Receive_Activity extends AppCompatActivity implements View.OnClickL
 
                 /** 서버로 데이터 전송 */
                 sendData();
+
+                Intent t = new Intent(Receive_Activity.this, Receive_Activity.class);
+                startActivity(t);
                 finish();
             }
         });
