@@ -1,6 +1,7 @@
 # 2021-1 경북대학교 컴퓨터학부 종합설계프로젝트2
 * :sparkles:DIP 성과발표회 - 우수상:sparkles:
 * 산학협력기관: 주식회사 영자닷컴
+* [전체 organization 바로가기 :eyes:](https://github.com/CDP2-4)
 
 ### Contributor
 * **[nullyng](https://github.com/nullyng) (Mobile-App)**
@@ -9,9 +10,7 @@
 * [InhuJo](https://github.com/InhuJo) (Web)
 * [jaewan1230](https://github.com/jaewan1230) (Web)
 
-:eyes: [전체 organization 바로가기](https://github.com/CDP2-4)
 
----
 
 ## 중소규모 유해화학물질 취급장의 자동 재고관리 시스템 (Android)
 :white_check_mark: 허술한 재고관리로 인한 화학사고를 방지하고
