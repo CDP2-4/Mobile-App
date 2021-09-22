@@ -12,8 +12,8 @@
 :white_check_mark: [전체 organization 바로가기](https://github.com/CDP2-4)
 
 
-## 중소규모 유해 화학물질 취급장의 자동 재고 관리 시스템 (Android)
-* 허술한 재고 관리로 인한 화학 사고를 방지하고, 보다 쉽게 관제 상황에서 활용할 수 있는 화학 물질 재고 관리 플랫폼
+## 중소규모 유해화학물질 취급장의 자동 재고관리 시스템 (Android)
+* 허술한 재고관리로 인한 화학사고를 방지하고, 관제 상황에서 보다 쉽게 활용할 수 있는 화학물질 재고관리 플랫폼
 
 ### 1. 스플래시 화면
 ![initial](https://user-images.githubusercontent.com/57346428/134291475-17a7c68c-cc30-4be4-bd57-c0321c5a5907.png)
