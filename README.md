@@ -16,7 +16,7 @@
 * 허술한 재고 관리로 인한 화학 사고를 방지하고, 보다 쉽게 관제 상황에서 활용할 수 있는 화학 물질 재고 관리 플랫폼
 
 ### 1. 스플래시 화면
-![initial](https://user-images.githubusercontent.com/57346428/134291475-17a7c68c-cc30-4be4-bd57-c0321c5a5907.png)
+![initial](https://user-images.githubusercontent.com/57346428/134291475-17a7c68c-cc30-4be4-bd57-c0321c5a5907.png){: width="100" height="200"}
 
 ### 2. 로그인 화면
 ![login](https://user-images.githubusercontent.com/57346428/134291487-a3c18b34-ddbb-4d5c-8296-cc8181af844b.png)
